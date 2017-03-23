@@ -117,9 +117,62 @@ public class Input {
 		return finalCost;
 	}
 	
+	public void print (double i, int p, boolean d, boolean f, boolean e, boolean o, double finalFinal){
+		if (drugs == true && eat == false && tech == false && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs");
+		} else if (drugs == true && eat == true && tech == false && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs, food");
+		} else if (drugs == true && eat == true && tech == true && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs, food, electronics");
+		} else if (drugs == true && eat == true && tech == true && etc == true){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs, food, electronics, other");
+		} else if (drugs == false && eat == true && tech == false && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, food");
+		} else if (drugs == false && eat == true && tech == true && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, food, electronics");
+		} else if (drugs == false && eat == true && tech == true && etc == true){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, food, electronics, other");
+		} else if (drugs == false && eat == false && tech == true && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs, electronics");
+		} else if (drugs == false && eat == false && tech == true && etc == true){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, electronics, other");
+		} else if (drugs == true && eat == false && tech == true && etc == true){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs, electronics, other");
+		} else if (drugs == true && eat == false && tech == true && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs, electronics");
+		} else if (drugs == false && eat == false && tech == false && etc == true){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, other");
+		} else if (drugs == true && eat == false && tech == false && etc == true){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, drugs, other");
+		} else if (drugs == false && eat == true && tech == false && etc == true){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people, food, other");
+		} else if (drugs == false && eat == false && tech == false && etc == false){
+			System.out.println("Input: $" + i +
+					", " + numPeople + " people");
+		}
+		
+		DecimalFormat twoDec = new DecimalFormat("0.00");
+		System.out.println("Output: $" +twoDec.format(finalFinal));
+	}
+	
 	public static void main (String[] arguments){
 		System.out.println ("Welcome to NuPack Pricing Calculator\n");
 	
+		//INITIALIZE
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Enter initial cost");
 		String initialize = keyboard.nextLine();
@@ -132,6 +185,7 @@ public class Input {
 		String enterPeople = keyboard.nextLine();
 		numPeople = Integer.parseInt(enterPeople);
 		
+		//ADDITIONAL MARKUPS
 		System.out.println ("Are there pharmaceuticals involved [true/false]? " );
 		String enterDrugs = keyboard.nextLine();
 		drugs = Boolean.parseBoolean(enterDrugs);
@@ -148,77 +202,16 @@ public class Input {
 		String enterOther = keyboard.nextLine();
 		etc = Boolean.parseBoolean(enterOther);
 		
+		//CALCULATATIONS
+		testInput.calcFlatMarkup(testInput.input); //Calculate Flat Markup Cost
+		testInput.calcBasePrice(initialPrice, testInput.flatMarkup); //Calculate Base Price
+		testInput.calcMarkUps(testInput.basePrice, numPeople, drugs, eat, tech, etc); //Calculate the additional markups
+		testInput.calcFinalCost(testInput.basePrice, testInput.markUps); //Calculate the final cost
 		
-		//System.out.println ("\n\nCalculate Flat Markup Cost");
-		testInput.calcFlatMarkup(testInput.input);
-		//System.out.println ("Flat Markup Cost is (should be 64.9995) $" + testInput.flatMarkup);
-		
-		
-		//System.out.println ("\n\nCalculate Base Price");
-		testInput.calcBasePrice(initialPrice, testInput.flatMarkup);
-		//System.out.println ("Base Price is (should be 1364.9895) $" + testInput.basePrice);
-	
-		//System.out.println ("\n\nCalculate the additional markups");
-		testInput.calcMarkUps(testInput.basePrice, numPeople, drugs, eat, tech, etc);
-		//System.out.println ("The additional markup is " + testInput.markUps);
-		
-		//System.out.println ("\n\nCalculate the final cost");
-		testInput.calcFinalCost(testInput.basePrice, testInput.markUps);
-		
-		DecimalFormat twoDec = new DecimalFormat("0.00");
-		//System.out.println ("The final cost of the Project is $" + twoDec.format(testInput.finalCost));
-	
-		System.out.println ("\n");
-		//Printing output
-		if (drugs == true && eat == false && tech == false && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs");
-		} else if (drugs == true && eat == true && tech == false && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs, food");
-		} else if (drugs == true && eat == true && tech == true && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs, food, electronics");
-		} else if (drugs == true && eat == true && tech == true && etc == true){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs, food, electronics, other");
-		} else if (drugs == false && eat == true && tech == false && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, food");
-		} else if (drugs == false && eat == true && tech == true && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, food, electronics");
-		} else if (drugs == false && eat == true && tech == true && etc == true){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, food, electronics, other");
-		} else if (drugs == false && eat == false && tech == true && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs, electronics");
-		} else if (drugs == false && eat == false && tech == true && etc == true){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, electronics, other");
-		} else if (drugs == true && eat == false && tech == true && etc == true){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs, electronics, other");
-		} else if (drugs == true && eat == false && tech == true && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs, electronics");
-		} else if (drugs == false && eat == false && tech == false && etc == true){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, other");
-		} else if (drugs == true && eat == false && tech == false && etc == true){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, drugs, other");
-		} else if (drugs == false && eat == true && tech == false && etc == true){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people, food, other");
-		} else if (drugs == false && eat == false && tech == false && etc == false){
-			System.out.println("Input: $" + testInput.input +
-					", " + numPeople + " people");
-		}
-		
-		System.out.println("Output: $" +twoDec.format(testInput.finalCost));
-		
+		//PRINT INPUT AND OUTPUT
+		System.out.println ("");
+		testInput.print(testInput.input, numPeople, drugs, eat, tech, etc, testInput.finalCost);
+
 	}
 	
 }
