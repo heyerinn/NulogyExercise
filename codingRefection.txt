@@ -1,0 +1,5 @@
+In designing this, I tried to figure out how to calculate the output first to see how the system would flow. 
+I considered what variables I have and needed. Initial cost, number of workers needed, and materials involved are given by the user. 
+Then the markup percentages are embedded in the program itself.
+I thought of having the input be read as a string like “initial cost, number of people, types of materials involved”. 
+But I was having trouble in executing it that way so I decided on just asking the input one by one.
